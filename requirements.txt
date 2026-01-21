@@ -7,5 +7,8 @@ setuptools
 pymongo
 certifi
 pymongo[srv]
+scipy
+pyaml
+dill
 
 #-e .
