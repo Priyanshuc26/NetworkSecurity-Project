@@ -10,5 +10,6 @@ pymongo[srv]
 scipy
 pyaml
 dill
+mlflow
 
 #-e .
