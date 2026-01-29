@@ -11,5 +11,10 @@ scipy
 pyaml
 dill
 mlflow
+dagshub
+fastapi
+uvicorn
+starlette
+python-multipart
 
 #-e .
