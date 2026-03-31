@@ -30,21 +30,24 @@ This version upgrades the core pipeline to handle live, high-velocity infrastruc
 
 ---
 
-## 🏗️ Enterprise-Grade Pipeline Architecture
+## 🏗️ Modular ML Pipeline Architecture
 
-This system is built using continuous integration principles, separated into four highly decoupled, fault-tolerant stages:
+This project is built using object-oriented programming principles, separated into four distinct, highly decoupled stages. The entire pipeline is wrapped in a custom logging and exception handling framework to ensure easy debugging and continuous monitoring.
 
-**1. Fault-Tolerant Data Ingestion**
-Bypasses simple local file reading by establishing a secure, asynchronous connection to **MongoDB**. The system programmatically fetches, batches, and partitions raw data into strict train/test splits, ensuring scalable updates without manual code intervention.
+**Foundation: Custom Logging & Exception Handling**
+Instead of standard print statements, the pipeline uses a centralized, custom Python logger to track the execution flow across all modules. Custom exception classes are implemented to catch and isolate pipeline failures gracefully, preventing silent errors and making debugging straightforward.
 
-**2. Automated Schema Validation & Anomaly Detection**
-Raw data is never trusted. Before processing, the ingestion output passes through a strict validation gateway that automatically verifies data types, checks for missing columns, and catches schema drift to prevent silent downstream failures.
+**1. Data Ingestion**
+Bypasses local CSV files by connecting directly to **MongoDB**. This module programmatically fetches the raw dataset from the cloud, batches it, and splits it into training and testing sets for downstream use.
 
-**3. Dynamic Feature Engineering (Data Transformation)**
-A highly customized ETL module that mathematically transforms the raw data. It handles complex edge cases dynamically, automatically applies statistical scaling, and serializes the transformation logic into artifacts to ensure 100% reproducibility during live inference.
+**2. Data Validation**
+Before any processing happens, the ingested data passes through a validation check. This stage verifies that the incoming data matches the expected schema (checking data types and ensuring no missing columns), preventing the pipeline from crashing due to unexpected data changes.
 
-**4. Automated Model Lifecycle (Model Training)**
-Integrates classical machine learning algorithms with heavy-duty **MLflow** tracking. Replaces manual evaluation with an automated training loop that tracks hyperparameters, logs evaluation metrics (Accuracy, F1-Score, Precision), and registers the highest-performing model version as a production-ready artifact.
+**3. Data Transformation**
+A dedicated ETL module that cleans and prepares the data. It mathematically handles edge cases (like neutralizing `NaN` and `Infinity` values), applies statistical scaling, and serializes these preprocessing steps into a `.pkl` artifact. This ensures the exact same transformations are applied during real-time inference.
+
+**4. Model Training & Tracking**
+Trains the classical machine learning models while integrating with **MLflow**. Instead of manual evaluation, this stage automatically tracks hyperparameters, logs performance metrics (Accuracy, Precision, F1-Score), and saves the best-performing model as a ready-to-use artifact.
 
 ---
 
