@@ -65,8 +65,9 @@ Trains the classical machine learning models while integrating with **MLflow**. 
 
 **1. Clone the repository**
 ```bash
-git clone [https://github.com/yourusername/network-security-pipeline.git](https://github.com/yourusername/network-security-pipeline.git)
+git clone https://github.com/Priyanshuc26/NetworkSecurity-Project
 cd network-security-pipeline
+```
 
 **2. Create a virtual environment**
 ```bash
